@@ -15,6 +15,14 @@ terraform {
       version = "< 4.0"
     }
   }
+
+  backend "s3" {
+    bucket = "dl-symbiosis-tf-state"
+    key    = "project/symbiosis_tf/terraform.tfstate"
+    region = "ap-southeast-1"
+
+    dynamodb_table = "dl-symbiosis-tf-state-locking"
+  }
 }
 
 # ------------------------------------------------------------------------------
@@ -30,13 +38,7 @@ provider "aws" {
 # Setup Remote Backend
 # ------------------------------------------------------------------------------
 
-backend "s3" {
-  bucket = "dl-symbiosis-tf-state"
-  key    = "project/symbiosis_tf/terraform.tfstate"
-  region = "ap-southeast-1"
 
-  dynamodb_table = "dl-symbiosis-tf-state-locking"
-}
 
 
 # ------------------------------------------------------------------------------
