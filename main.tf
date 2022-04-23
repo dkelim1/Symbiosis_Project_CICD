@@ -25,6 +25,20 @@ provider "aws" {
   region = "ap-southeast-1"
 }
 
+
+# ------------------------------------------------------------------------------
+# Setup Remote Backend
+# ------------------------------------------------------------------------------
+
+backend "s3" {
+  bucket = "dl-symbiosis-tf-state"
+  key    = "project/symbiosis_tf/terraform.tfstate"
+  region = "ap-southeast-1"
+
+  dynamodb_table = "dl-symbiosis-tf-state-locking"
+}
+
+
 # ------------------------------------------------------------------------------
 # PREPARES THE EC2 INSTANCES FOR LAUNCHING
 # ------------------------------------------------------------------------------
